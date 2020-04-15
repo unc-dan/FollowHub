@@ -13,8 +13,8 @@ class FHTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
-    }
-    
+    } 
+    // This init is for handling storyboards, we have to put it here or xcode will complain
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

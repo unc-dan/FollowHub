@@ -20,7 +20,7 @@ class FHButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    // Custom initialiser which takes 2 parameters. So we don't have to configure the whole code every time we use the button.
     init(backgroundColor: UIColor, title: String) {
         super.init(frame: .zero)
         self.backgroundColor = backgroundColor
