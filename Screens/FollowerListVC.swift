@@ -22,6 +22,6 @@ class FollowerListVC: UIViewController {
     // Prevents nav bar from disappearing when half way swiping back and forward from Followers/Search. We create viewWillAppear and place isNBH inside, cut from viewDidLoad()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 }
