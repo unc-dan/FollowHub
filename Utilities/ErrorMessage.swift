@@ -8,7 +8,8 @@
 
 import Foundation
 //enum raw value is string, all cases are string. associated values are when each case has individual type
-enum ErrorMessage: String {
+//we also make sure our enum conforms to Error protocol
+enum FHError: String, Error {
     case invalidUsername    = "This username created an invalid request. Please try again."
     case unableToComplete   = "Unable to complete your request. Please check your internet connection."
     case invalidResponse    = "Invalid response from the server. Please try again."
