@@ -17,6 +17,15 @@ class FollowerListVC: UIViewController {
         
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        NetworkManager.shared.getFollowers(for: username, page: 1) { followers, errorMessage in
+            guard let followers = followers else {
+                self.presentFHAlertOnMainThread(title: "Bad stuff happened", message: errorMessage!, buttonTitle: "Ok")
+                return
+            }
+            print("followers.count = \(followers.count)")
+            print(followers)
+        }
     }
     
     // Prevents nav bar from disappearing when half way swiping back and forward from Followers/Search. We create viewWillAppear and place isNBH inside, cut from viewDidLoad()
