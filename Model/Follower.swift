@@ -8,8 +8,13 @@
 
 import Foundation
 
-struct Follower: Codable {
+struct Follower: Codable, Hashable {
     var login: String
     var avatarUrl: String
+    
+    //if we want specific variable to be hashed rather than everything in Follower (slight optimisation)
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(login)
+    }
 }
 
