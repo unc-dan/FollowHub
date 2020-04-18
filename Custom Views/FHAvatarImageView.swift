@@ -10,6 +10,7 @@ import UIKit
 
 class FHAvatarImageView: UIImageView {
     
+    let cache            = NetworkManager.shared.cache
     let placeholderImage = UIImage(named: "avatar-placeholder")!
 
     override init(frame: CGRect) {
@@ -31,21 +32,29 @@ class FHAvatarImageView: UIImageView {
     }
     
     
-    //dont want to spit out error messages because we have placeholder image which conveys the error.
     func downloadImage(from urlString: String) {
+        
+        let cacheKey = NSString(string: urlString)
+        // once image is in the cache, we return from the function. (so we only download image once)
+        if let image = cache.object(forKey: cacheKey) {
+            self.image = image
+            return
+        }
+        
         guard let url = URL(string: urlString) else { return }
         
+        // network call
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+        // return from function if there's an error
             guard let self = self else { return }
             if error != nil { return }
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
             guard let data = data else { return }
-            
+        // if data is good and we get the image - we set the image in to the cache
             guard let image = UIImage(data: data) else { return }
-            
-            DispatchQueue.main.async {
-                self.image = image
-            }
+            self.cache.setObject(image, forKey: cacheKey)
+        // go to main thread and set the image that we downloaded, if image is already in cache we aren't here.
+            DispatchQueue.main.async { self.image = image }
             
         }
         

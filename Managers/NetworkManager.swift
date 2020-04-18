@@ -6,13 +6,14 @@
 //  Copyright © 2020 Dan T. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager {
     
     //Every NetworkManager will have this variable on it. (NetworkManager.shared.function)
     static let shared   = NetworkManager()
-    let baseURL         = "https://api.github.com/users/"
+    private let baseURL         = "https://api.github.com/users/"
+    let cache           = NSCache<NSString, UIImage>()
     
     // Restrict to only one instance (Singleton)
     private init() {}
