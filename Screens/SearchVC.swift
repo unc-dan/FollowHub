@@ -25,17 +25,19 @@ class SearchVC: UIViewController {
         createDismissKeyboardTapGesture()
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
-
     }
+    
     
     //Dismisses keyboard when user taps outside the keyboard area
     func createDismissKeyboardTapGesture() {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
     }
+    
     
     @objc func pushFollowerListVC() {
         guard isUsernameEntered else {
@@ -50,6 +52,7 @@ class SearchVC: UIViewController {
         navigationController?.pushViewController(followerListVC, animated: true)
     }
 
+    
     func configureLogoImageView() {
         view.addSubview(logoImageView)
         // We add this line of code because our logoImageView is just a normal UIImageView, our custom classes already contain this code (so we can use it with autolayout)
