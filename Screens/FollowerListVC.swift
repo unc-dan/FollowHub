@@ -54,9 +54,11 @@ class FollowerListVC: UIViewController {
     //use weak self to stop memory leaks with ARC strong references between FollowerListVC and NetworkManager
     //use guard statement instead of making 'self' optionals
     func getFollowers(username: String, page: Int) {
+        showLoadingView()
         NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
-            guard let self = self else { return }
             
+            guard let self = self else { return }
+            self.dismissLoadingView()
             switch result {
             case .success(let followers):
                 if followers.count < 100 { self.hasMoreFollowers = false }
